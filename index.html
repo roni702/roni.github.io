@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
+        body{
+            background-color: #9894945d;
+        }
         .hero {
-            background-color: rgb(178, 176, 176);
+            background-image: url(../roni.github.io/images/WebsiteCover.png);
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -21,30 +24,33 @@
             color: white;
         }
 
-        .eersteP{
-            padding-left: 5%;
-            font-size: 1.2rem;
+        .eersteP {
+            padding-left: 6%;
+            font-size: 1.5rem;
             display: flex;
             align-items: start;
             font-weight: 500;
             font-family: cursive;
-            color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
         }
-        .tweedeP{
+
+        .tweedeP {
             font-size: large;
-            font-family:cursive;
-            background: linear-gradient(to right, rgb(43, 44, 42), rgb(78, 69, 67), rgb(67, 66, 52), rgb(1, 1, 1));
+            font-size: 1.5rem;
+            font-family: cursive;
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(234, 203, 195), rgb(210, 209, 197), rgb(193, 146, 146));
             -webkit-background-clip: text;
             color: transparent;
         }
 
-        .name{
+        .name {
+            font-size: 3rem;
             font-style: oblique;
             background: linear-gradient(to right, rgb(60, 255, 0), rgb(255, 60, 0), rgb(255, 234, 0), rgb(255, 255, 255));
             -webkit-background-clip: text;
             color: transparent;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            }
+        }
 
         .contact-form {
             margin-top: 20px;
@@ -59,10 +65,11 @@
             Welcome to my portfolio site!
         </div>
     </nav>
-    
+
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="../roni.github.io/images/Porfolio_logo.png" style="height: 80px;" alt="Porfolio_logo"></a>
+            <a class="navbar-brand" href="#"><img src="../roni.github.io/images/Porfolio_logo.png" style="height: 80px;"
+                    alt="Porfolio_logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -83,13 +90,17 @@
         </div>
     </nav>
 
-    
     <div class="hero">
+
         <div>
-            <p class="eersteP">Hey, Ik ben...</p>
-            <h1 class="name">Roni Morad</h1>
-            <p class="tweedeP">Ik ben momenteel een student op Game Developer opleiding  </p>
-            <a href="#contact" class="btn btn-dark" style="color:rgb(190, 199, 199); font-family: cursive;">Download CV!</a>
+            <div class="eersteP">
+                <p class="typewriter" data-text="Hey, ik ben..."></p>
+            </div>
+            <h1 class="name typewriter" data-text="Roni Morad"></h1>
+            <p class="tweedeP typewriter" data-text="Ik ben momenteel een student op Game Developer opleiding."></p>
+            
+            <a href="#contact" class="btn btn-dark" style="color:rgb(190, 199, 199); font-family: cursive;">Download
+                CV!</a>
         </div>
     </div>
 
@@ -130,10 +141,11 @@
                 <h3>Ervaringen:</h3>
                 <h5>Shopify (webshops):</h5>
                 <ul>
-                    <li><a href="https://www.saronafashion.com " target="_blank" >Sarona Fashion</a> (opgebouwd en beheerder)</li>
-                    <li><a href="https://www.efrinmode.com" target="_blank" >Efrin Mode</a>(opgebouwd en beheerder)</li>
+                    <li><a href="https://www.saronafashion.com " target="_blank">Sarona Fashion</a> (opgebouwd en
+                        beheerder)</li>
+                    <li><a href="https://www.efrinmode.com" target="_blank">Efrin Mode</a>(opgebouwd en beheerder)</li>
                 </ul>
-                
+
             </div>
         </div>
     </div>
@@ -144,9 +156,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="../roni.github.io/images/htmlProject.jpeg" class="card-img-top"
-
-                        alt="Project 1">
+                    <img src="../roni.github.io/images/htmlProject.jpeg" class="card-img-top" alt="Project 1">
                     <div class="card-body">
                         <h5 class="card-title">HTML & CSS</h5>
                         <a href="#" class="btn btn-primary">Show Project</a>
@@ -155,8 +165,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="../roni.github.io/images/CoverArt.png" class="card-img-top"
-                        alt="Project 2">
+                    <img src="../roni.github.io/images/CoverArt.png" class="card-img-top" alt="Project 2">
                     <div class="card-body">
                         <h5 class="card-title">Text Adventure</h5>
                         <a href="#" class="btn btn-primary">Show Project</a>
@@ -165,8 +174,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="../roni.github.io/images/bordspel.jpeg" class="card-img-top"
-                        alt="Project 3">
+                    <img src="../roni.github.io/images/bordspel.jpeg" class="card-img-top" alt="Project 3">
                     <div class="card-body">
                         <h5 class="card-title">Bordspel</h5>
                         <a href="#" class="btn btn-primary">Shpw Project</a>
@@ -211,6 +219,7 @@
     </div>
 
 
+    <script src="../roni.github.io/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
