@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bit-codes Portfolio</title>
+    <title>Roni's Portfolio</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
         .hero {
-            background-image: url("../roni.github.io/images/CoverArt.png");
+            background-color: rgb(178, 176, 176);
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -21,7 +21,30 @@
             color: white;
         }
 
+        .eersteP{
+            padding-left: 5%;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: start;
+            font-weight: 500;
+            font-family: cursive;
+            color: rgb(0, 0, 0);
+        }
+        .tweedeP{
+            font-size: large;
+            font-family:cursive;
+            background: linear-gradient(to right, rgb(43, 44, 42), rgb(78, 69, 67), rgb(67, 66, 52), rgb(1, 1, 1));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
 
+        .name{
+            font-style: oblique;
+            background: linear-gradient(to right, rgb(60, 255, 0), rgb(255, 60, 0), rgb(255, 234, 0), rgb(255, 255, 255));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
 
         .contact-form {
             margin-top: 20px;
@@ -31,9 +54,15 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar bg-dark">
+        <div class="d-flex justify-content-center align-items-center" style="width: 100%; color: rgb(186, 186, 186);">
+            Welcome to my portfolio site!
+        </div>
+    </nav>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
         <div class="container">
-            <a class="navbar-brand" href="#">Portfolio</a>
+            <a class="navbar-brand" href="#"><img src="../roni.github.io/images/Porfolio_logo.png" style="height: 80px;" alt="Porfolio_logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,12 +83,13 @@
         </div>
     </nav>
 
-
+    
     <div class="hero">
         <div>
-            <h1>Bit-codes</h1>
-            <p>Student</p>
-            <a href="#contact" class="btn btn-primary">Contact me!</a>
+            <p class="eersteP">Hey, Ik ben...</p>
+            <h1 class="name">Roni Morad</h1>
+            <p class="tweedeP">Ik ben momenteel een student op Game Developer opleiding  </p>
+            <a href="#contact" class="btn btn-dark" style="color:rgb(190, 199, 199); font-family: cursive;">Download CV!</a>
         </div>
     </div>
 
@@ -86,25 +116,24 @@
                 </div>
 
                 <div class="progress mb-3">
-                    <div class="progress-bar bg-danger d-flex align-items-center" role="progressbar" style="width: 80%"
+                    <div class="progress-bar bg-danger d-flex align-items-center" role="progressbar" style="width: 70%"
                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">Bootstrap</div>
+                </div>
+                <div class="progress mb-3">
+                    <div class="progress-bar bg-dark d-flex align-items-center" role="progressbar" style="width: 50%"
+                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">Unity</div>
                 </div>
             </div>
 
 
             <div class="col-md-6">
-                <h3>Certificates:</h3>
-                <h5>Bit Academy:</h5>
+                <h3>Ervaringen:</h3>
+                <h5>Shopify (webshops):</h5>
                 <ul>
-                    <li>Date Engineering</li>
-                    <li>Full Stack webdevelopement</li>
+                    <li><a href="https://www.saronafashion.com">Sarona Fashion</a> (opgebouwd en beheerder)</li>
+                    <li><a href="https://www.efrinmode.com">Efrin Mode</a>(opgebouwd en beheerder)</li>
                 </ul>
                 
-                <h5>Programming Certifications:</h5>
-                <ul>
-                    <li>Youtube Academy</li>
-                    <li>Youtube Academy</li>
-                </ul>
             </div>
         </div>
     </div>
