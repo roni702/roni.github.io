@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
-        body{
+        body {
             background-color: #9894945d;
         }
+
         .hero {
             background-image: url(../roni.github.io/images/WebsiteCover.png);
             background-size: cover;
@@ -97,9 +98,10 @@
                 <p class="typewriter" data-text="Hey, ik ben..."></p>
             </div>
             <h1 class="name typewriter" data-text="Roni Morad"></h1>
-            <p class="tweedeP typewriter" data-text="Ik ben momenteel een student op Game Developer opleiding."></p>
-            
-            <a href="#contact" class="btn btn-dark" style="color:rgb(190, 199, 199); font-family: cursive;">Download
+            <p class="tweedeP typewriter" data-text="Ik ben momenteel een student op Game Developement opleiding."></p>
+
+            <a href="#contact" class="btn btn-dark"
+                style="color:rgb(190, 199, 199); font-family: 'Courier New', Courier, monospace;">Download
                 CV!</a>
         </div>
     </div>
@@ -137,14 +139,24 @@
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-6 mt-5">
                 <h3>Ervaringen:</h3>
-                <h5>Shopify (webshops):</h5>
                 <ul>
-                    <li><a href="https://www.saronafashion.com " target="_blank">Sarona Fashion</a> (opgebouwd en
-                        beheerder)</li>
-                    <li><a href="https://www.efrinmode.com" target="_blank">Efrin Mode</a>(opgebouwd en beheerder)</li>
+                    <li>
+                        <h5>Shopify (webshops):</h5>
+                        <ul>
+                            <li><a href="https://www.saronafashion.com " target="_blank">Sarona Fashion</a> (opgebouwd
+                                en
+                                beheerder)</li>
+                            <li><a href="https://www.efrinmode.com" target="_blank">Efrin Mode</a>(opgebouwd en
+                                beheerder)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h5>Werken met Exel</h5>
+                    </li>
                 </ul>
+
 
             </div>
         </div>
@@ -159,7 +171,7 @@
                     <img src="../roni.github.io/images/htmlProject.jpeg" class="card-img-top" alt="Project 1">
                     <div class="card-body">
                         <h5 class="card-title">HTML & CSS</h5>
-                        <a href="#" class="btn btn-primary">Show Project</a>
+                        <a href="#" class="btn btn-dark">Show Project</a>
                     </div>
                 </div>
             </div>
@@ -168,7 +180,7 @@
                     <img src="../roni.github.io/images/CoverArt.png" class="card-img-top" alt="Project 2">
                     <div class="card-body">
                         <h5 class="card-title">Text Adventure</h5>
-                        <a href="#" class="btn btn-primary">Show Project</a>
+                        <a href="#" class="btn btn-dark">Show Project</a>
                     </div>
                 </div>
             </div>
@@ -177,7 +189,7 @@
                     <img src="../roni.github.io/images/bordspel.jpeg" class="card-img-top" alt="Project 3">
                     <div class="card-body">
                         <h5 class="card-title">Bordspel</h5>
-                        <a href="#" class="btn btn-primary">Shpw Project</a>
+                        <a href="#" class="btn btn-dark">Show Project</a>
                     </div>
                 </div>
             </div>
@@ -185,40 +197,26 @@
     </div>
 
 
-    <div class="container mt-5" id="contact">
-        <h2>Contact</h2>
-        <p>Heeft u een vraag of wilt u samenwerken? Vul het onderstaande formulier in en ik zal zo snel mogelijk contact
-            met u opnemen.</p>
-        <div class="row">
-            <div class="col-md-6">
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Naam</label>
-                        <input type="text" class="form-control" id="name" placeholder="Vul uw naam in">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">E-mailadres</label>
-                        <input type="email" class="form-control" id="email" placeholder="Vul uw e-mailadres in">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Bericht</label>
-                        <textarea class="form-control" id="message" rows="3" placeholder="Vul uw bericht in"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Versturen</button>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <div class="contact-info">
-                    <h3>Contactgegevens</h3>
-                    <p><strong>E-mail:</strong> ronymurad50@email.com</p>
-                    <p><strong>Adres:</strong> Ariënsplein 1, 7511JX Enschede</p>
-                    <p><strong>Telefoonnummer:</strong> 012-3456789</p>
-                </div>
-            </div>
+    <form class="contact-form" action="contact.php" method="POST">
+        <div class="form-group">
+            <label for="name">Naam</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Vul uw naam in" required>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="email">E-mailadres</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Vul uw e-mailadres in" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Bericht</label>
+            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Vul uw bericht in" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Versturen</button>
+    </form>
+    
 
-
+    <footer>
+        dvd
+    </footer>
     <script src="../roni.github.io/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
