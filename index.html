@@ -56,6 +56,25 @@
         .contact-form {
             margin-top: 20px;
         }
+
+        .response-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            /* Verborgen standaard */
+        }
+
+        .response-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .response-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
     </style>
 </head>
 
@@ -197,46 +216,77 @@
     </div>
 
 
-    <form class="contact-form" onsubmit="sendEmail(event)">
-        <div class="form-group">
-            <label for="name">Naam</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Vul uw naam in" required>
+    <div class="container mt-5" id="contact">
+        <h2>Contact</h2>
+        <p>Heeft u een vraag of wilt u samenwerken? Vul het onderstaande formulier in en ik zal zo snel mogelijk contact
+            met u opnemen.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" class="contact-form">
+                    <div class="form-group">
+                        <label for="from_name">Naam</label>
+                        <input type="text" class="form-control" name="from_name" id="from_name"
+                            placeholder="Vul uw naam in" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reply_to">E-mailadres</label>
+                        <input type="email" class="form-control" name="reply_to" id="reply_to"
+                            placeholder="Vul uw e-mailadres in" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Bericht</label>
+                        <textarea class="form-control" name="message" id="message" rows="3"
+                            placeholder="Vul uw bericht in" required></textarea>
+                    </div>
+                    <button type="submit" id="button" class="btn btn-primary">Versturen</button>
+                    <div id="response-message" class="response-message"></div> <!-- Meldingscontainer -->
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="contact-info">
+                    <h3>Contactgegevens</h3>
+                    <p><strong>E-mail:</strong> ronymurad50@email.com</p>
+                    <p><strong>Adres:</strong> Ariënsplein 1, 7511JX Enschede</p>
+                    <p><strong>Telefoonnummer:</strong> 012-3456789</p>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">E-mailadres</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Vul uw e-mailadres in" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Bericht</label>
-            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Vul uw bericht in" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Versturen</button>
-    </form>
-    
-    
+    </div>
+
 
     <footer>
         dvd
     </footer>
-    <script>
-        function sendEmail(event) {
-            event.preventDefault(); // Voorkom de standaard submit-actie
-        
-            emailjs.sendForm('service_dqa3jlr', 'template_m7uwpj3', event.target)
-                .then(function() {
-                    alert('E-mail succesvol verzonden!');
-                }, function(error) {
-                    alert('Er is een fout opgetreden bij het verzenden van de e-mail: ' + JSON.stringify(error));
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        emailjs.init('AYuLbWMU5Dv5R8Y7Y');
+
+        const btn = document.getElementById('button');
+        const responseMessage = document.getElementById('response-message');
+
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            btn.value = 'Sending...';
+
+            const serviceID = 'default_service';
+            const templateID = 'template_m7uwpj3';
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    btn.value = 'Versturen';
+                    responseMessage.textContent = 'Verzonden!';
+                    responseMessage.className = 'response-message success';
+                    responseMessage.style.display = 'block';
+                }, (err) => {
+                    btn.value = 'Versturen';
+                    responseMessage.textContent = 'Er is een fout opgetreden: ' + JSON.stringify(err);
+                    responseMessage.className = 'response-message error';
+                    responseMessage.style.display = 'block';
                 });
-        }
-        </script>
-        
-    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
-<script type="text/javascript">
-    (function(){
-        emailjs.init("AYuLbWMU5Dv5R8Y7Y");
-    })();
-</script>
+        });
+    </script>
+
 
     <script src="../roni.github.io/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
