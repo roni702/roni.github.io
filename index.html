@@ -197,7 +197,7 @@
     </div>
 
 
-    <form class="contact-form" action="contact.php" method="POST">
+    <form class="contact-form" onsubmit="sendEmail(event)">
         <div class="form-group">
             <label for="name">Naam</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Vul uw naam in" required>
@@ -213,10 +213,31 @@
         <button type="submit" class="btn btn-primary">Versturen</button>
     </form>
     
+    
 
     <footer>
         dvd
     </footer>
+    <script>
+        function sendEmail(event) {
+            event.preventDefault(); // Voorkom de standaard submit-actie
+        
+            emailjs.sendForm('service_dqa3jlr', 'template_m7uwpj3', event.target)
+                .then(function() {
+                    alert('E-mail succesvol verzonden!');
+                }, function(error) {
+                    alert('Er is een fout opgetreden bij het verzenden van de e-mail: ' + JSON.stringify(error));
+                });
+        }
+        </script>
+        
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+<script type="text/javascript">
+    (function(){
+        emailjs.init("AYuLbWMU5Dv5R8Y7Y");
+    })();
+</script>
+
     <script src="../roni.github.io/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
