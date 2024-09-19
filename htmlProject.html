@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roni's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Zorgt ervoor dat de footer altijd onderaan staat */
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar bg-dark">
+        <div class="d-flex justify-content-center align-items-center" style="width: 100%; color: rgb(186, 186, 186);">
+            Welcome to my portfolio site!
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="../roni.github.io/images/Porfolio_logo.png" style="height: 80px;"
+                    alt="Porfolio_logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 content" id="projects">
+        <h2>Projecten Overzicht</h2>
+        <ul>
+            <li><a href="../roni.github.io/Website_portfolio/indexHome.html">Portfolio</a></li>
+            <li><a href="#">Website Namaken</a></li>
+            <li><a href="">Website Handleiding met HTML en CSS</a></li>
+        </ul>
+    </div>
+
+    <footer class="bg-dark text-white p-4">
+        <div class="container text-center">
+            <h5>Contact Gegevens</h5>
+            <p>Email: <a href="mailto: ronymurad50@gmail.com">ronymurad50@gmail.com</a></p>
+            <p>Telefoon: <a href="tel: +31615105176">+31615105176</a></p>
+            <p>Of via: <a href="">contactformulier</a></p>
+            <p>Adres: <a href="https://www.google.com/maps/search/?api=1&query=Assinklanden+98,+7542BM+Enschede+NL" target="_blank">Assinklanden 98, 7542BM Enschede NL</a></p>
+        </div>
+    </footer>
+
+    <script src="../roni.github.io/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

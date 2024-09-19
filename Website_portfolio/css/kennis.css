@@ -1,0 +1,117 @@
+*{
+    padding: 0; /* Reset de padding naar nul */
+    margin: 0; /* Reset de margin naar nul */
+    font-family: sans-serif; /* Stel het standaardlettertype in */
+}
+
+body{
+    background: linear-gradient(#111,#222); /* Achtergrond met een lineaire gradiënt instellen */
+    width: 100%; /* Volledige breedte van de viewport */
+    height: 100vh; /* Volledige hoogte van de viewport */
+    display: flex; /* Maak een flex-container voor de body */
+    justify-content: center; /* Horizontaal centreren van de inhoud */
+    align-items: center; /* Verticaal centreren van de inhoud */
+}
+
+body::after{
+    content: ''; /* Pseudo-element aan body toevoegen */
+    width: 100%; /* Volledige breedte */
+    height: 100%; /* Volledige hoogte */
+    background: red; /* Achtergrondkleur instellen op rood */
+    position: absolute; /* Absoluut positioneren binnen de body */
+    clip-path: circle(40% at right 70%); /* Cirkelvormige uitsnijding maken */
+    z-index: -1; /* Achtergrond zetten achter de content */
+}
+
+.container{
+    width: 80%; /* Breedte van de container instellen */
+    height: 80%; /* Hoogte van de container instellen */
+    background-color: rgba(74, 68, 68, 0.614); /* Achtergrondkleur instellen met transparantie */
+    border-radius: 20px; /* Afgeronde hoeken instellen */
+    overflow: hidden; /* Inhoud verbergen die buiten de container valt */
+}
+
+nav{
+    display: flex; /* Maak een flex-container voor de navigatiebalk */
+    justify-content: space-between; /* Verdeel de ruimte tussen elementen */
+    align-items: center; /* Verticaal centreren van de navigatiebalk */
+    width: 80%; /* Breedte instellen */
+    margin: 0 auto; /* Horizontaal centreren binnen de container */
+    padding: 20px 0; /* Binnenmarge toevoegen aan de navigatiebalk */
+    border-radius: 10px; /* Afgeronde hoeken instellen */
+    background-color:  rgba(47, 43, 43, 0.614); /* Achtergrondkleur instellen met transparantie */
+}
+
+nav .logo{
+    color: wheat; /* Tekstkleur instellen */
+    text-decoration: none; /* Decoratie van tekst uitschakelen */
+    font-size: 32px; /* Lettergrootte instellen */
+    letter-spacing: 3px; /* Spatiëring tussen tekens instellen */
+    font-weight: 700; /* Vet lettertype instellen */
+    font-family: 'Edu TAS Beginner', cursive; /* Lettertype instellen met backup */
+    font-family: 'Playpen Sans', cursive; /* Lettertype instellen met backup */
+}
+
+nav ul li{
+    display: inline-block; /* Maak lijstitems inline blokken */
+    margin: 0 6px; /* Buitenmarge toevoegen aan lijstitems */
+}
+
+nav ul li a{
+    color: white; /* Tekstkleur instellen voor koppelingsitems */
+    text-decoration: none; /* Decoratie van tekst uitschakelen voor koppelingsitems */
+    font-size: 18px; /* Lettergrootte instellen voor koppelingsitems */
+    font-weight: 500; /* Vet lettertype instellen voor koppelingsitems */
+    transition: 0.5s; /* Voeg overgangseffect toe */
+}
+
+nav ul li a:hover{
+    color: red; /* Tekstkleur wijzigen bij hover */
+}
+
+.content{
+    margin-top: 10%; /* Bovenmarge toevoegen aan de inhoud */
+}
+
+table{
+    margin: auto; /* Tabel in het midden van de container positioneren */
+    width: 70%; /* Breedte van de tabel instellen */
+    border: 2px solid wheat; /* Rand instellen met kleur */
+}
+
+th, td{
+    padding:  10px; /* Binnenmarge toevoegen aan tabelkoppen en -cellen */
+    color: white; /* Tekstkleur instellen */
+    font-weight: 700; /* Vet lettertype instellen */
+    text-align: center; /* Tekst uitlijnen naar het midden */
+    border: 2px dotted rgb(255, 241, 214); /* Gestippelde rand instellen */
+    letter-spacing: 1px; /* Spatiëring tussen tekens instellen */
+}
+
+span{
+    font-size: 25px; /* Lettergrootte instellen voor span-elementen */
+    color: wheat; /* Tekstkleur instellen */
+}
+
+h2{
+    position: relative; /* Relatieve positionering instellen */
+    left: 15%; /* Horizontale positie verschuiven */
+    padding: 20px 0px; /* Binnenmarge toevoegen aan h2-elementen */
+    color: white; /* Tekstkleur instellen */
+    font-weight: 900; /* Vet lettertype instellen */
+    letter-spacing: 1px; /* Spatiëring tussen tekens instellen */
+}
+
+#Csharp{
+    display: flex; /* Maak de Csharp-sectie een flex-container */
+    justify-content: center; /* Horizontaal centreren van de inhoud */
+    align-items: center; /* Verticaal centreren van de inhoud */
+}
+
+img{
+    width: 21px; /* Breedte van afbeeldingen instellen */
+}
+
+i{
+    padding: 0 10px; /* Binnenmarge toevoegen aan i-elementen */
+}

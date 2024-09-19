@@ -1,0 +1,83 @@
+*{
+    padding: 0; /* Reset van de padding */
+    margin: 0; /* Reset van de margin */
+    font-family: sans-serif; /* Algemeen lettertype voor de hele pagina */
+}
+
+body{
+    background: linear-gradient(#111, #222); /* Achtergrondinstelling met een lineaire gradiënt */
+    width: 100%; /* Volledige breedte van de pagina */
+    height: 100vh; /* Volledige viewporthoogte */
+    display: flex; /* Maak het lichaam een flex-container */
+    justify-content: center; /* Horizontale centrering van inhoud */
+    align-items: center; /* Verticale centrering van inhoud */
+}
+
+body::after{
+    content: ''; /* Pseudo-element voor extra achtergrondlaag */
+    width: 100%; /* Volledige breedte */
+    height: 100%; /* Volledige hoogte */
+    background: red; /* Achtergrondkleur */
+    position: absolute; /* Absoluut gepositioneerd element */
+    clip-path: circle(40% at right 70%); /* Cirkelvormige uitsnede op specifieke positie */
+    z-index: -1; /* Achtergrondlaag achter de inhoud */
+}
+
+.container{
+    width: 80%; /* Breedte van de container */
+    height: 80%; /* Hoogte van de container */
+    background-color: rgba(74, 68, 68, 0.614); /* Achtergrondkleur met transparantie */
+    border-radius: 20px; /* Afgeronde hoeken */
+    overflow: hidden; /* Inhoud verbergen die buiten de container valt */
+}
+
+nav{
+    display: flex; /* Maak het navigatiemenu een flex-container */
+    justify-content: space-between; /* Verdeel de ruimte tussen elementen in het menu */
+    align-items: center; /* Verticale centrering van inhoud */
+    width: 80%; /* Breedte van het menu */
+    margin: 0 auto; /* Horizontaal centreren van het menu */
+    padding: 20px 0; /* Binnenmarge toevoegen */
+    border-radius: 10px; /* Afgeronde hoeken */
+    background-color: rgba(47, 43, 43, 0.614); /* Achtergrondkleur met transparantie */
+}
+
+nav .logo{
+    color: wheat; /* Tekstkleur instellen */
+    text-decoration: none; /* Verwijder decoratie van koppelingen */
+    font-size: 32px; /* Tekstgrootte */
+    letter-spacing: 3px; /* Spatiëring tussen tekens */
+    font-weight: 700; /* Vet lettertype */
+    font-family: 'Edu TAS Beginner', cursive; /* Lettertype instellen met fallback */
+    font-family: 'Playpen Sans', cursive; /* Een andere fallback-lettertype */
+}
+
+nav ul li{
+    display: inline-block; /* Lijstitems worden naast elkaar weergegeven */
+    margin: 0 6px; /* Buitenmarge toevoegen tussen lijstitems */
+}
+
+nav ul li a{
+    color: white; /* Tekstkleur instellen voor koppelingen */
+    text-decoration: none; /* Verwijder decoratie van koppelingen */
+    font-size: 18px; /* Tekstgrootte */
+    font-weight: 500; /* Vet lettertype */
+    transition: 0.5s; /* Overgangseffect bij hover */
+}
+
+nav ul li a:hover{
+    color: red; /* Tekstkleur wijzigen bij hover */
+}
+
+.content{
+    width: 80%; /* Breedte van de inhoudscontainer */
+    padding: 30px; /* Binnenmarge toevoegen aan de inhoud */
+    margin: 0 auto; /* Horizontaal centreren van de inhoud */
+}
+
+p, ul, li{
+    color: white; /* Tekstkleur instellen */
+    font-family: 'Edu TAS Beginner', cursive; /* Lettertype instellen met fallback */
+    font-weight: 600; /* Vet lettertype */
+    letter-spacing: 1px; /* Spatiëring tussen tekens */
+}

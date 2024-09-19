@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact</title> <!-- Definieer de titel van de website -->
+    <link rel="stylesheet" href="css/contact.css"> <!-- Koppel de CSS-stijlen aan het HTML-document -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Koppel de icoonstijlen van de website aan het HTML-document -->
+</head>
+
+<body>
+    <div class="container"><!-- Creëer een div-container voor de navigatie en de inhoud van de pagina -->
+        <nav> <!-- Definieer het navigatiegedeelte van de website -->
+            <a class="logo" href="#"> Mijn Portfolio <i class="fa-solid fa-code fa-bounce fa-xs"></i></a>
+            <!-- Voeg het logo toe aan de navigatiebalk -->
+            <ul> <!-- Maak een ongeordende lijst voor de navigatie-items -->
+                <li><a href="indexHome.html">Home</a></li><!-- Maak een lijstitem met een klikbare link naar de startpagina -->
+                <li><a href="Kennis.html">Programmeerkennis</a></li>
+                <li><a href="OverMij.html">Over Mij</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="content"> <!-- Maak een div-container voor de inhoud van de pagina -->
+           <div class="contactformulier"> <!-- Voeg een class toe voor het contactformulier -->
+                <span>Stel je vraag via het contactformulier of via de andere contactgegevens die hieronder vermeld staan:</span> <!-- Gebruik een <span> om tekst op te maken -->
+                <div class="contact"> <!-- Voeg een div toe voor het contactformulier -->
+                    <span>
+                        <label for="name">Naam:</label> <!-- Voeg een label toe voor de naam-input -->
+                        <input type="text" name="name" id="name" > <!-- Voeg een invoerveld toe voor de naam van de gebruiker -->
+                    </span>
+                    <span>
+                        <label for="email">Email:</label> <!-- Voeg een label toe voor het e-mailadres-input -->
+                        <input type="email" name="email" id="email" placeholder="name@example.com"> <!-- Voeg een invoerveld toe voor het e-mailadres van de gebruiker -->
+                    </span>
+                    <span>
+                        <label for="opmerking">Opmerking:</label> <!-- Voeg een label toe voor de opmerkingen -->
+                        <textarea name="opmerking" id="opmerking" cols="30" rows="6" placeholder="Schrijf..."></textarea> <!-- Voeg een tekstvak toe voor opmerkingen -->
+                    </span>
+                    <span>
+                        <button type="submit">Verzenden</button><!-- Voeg een knop toe voor verzenden -->
+                    </span>
+                </div>
+                <div class="andere-contact"> <!-- Voeg een div toe voor andere contactgegevens -->
+                    <a href="#"><i class="fa-brands fa-whatsapp fa-xl"> Whatsapp</i></a> <!-- Voeg klikbare links toe met WhatsApp-icoon -->
+                    <a href="#"><i class="fa-brands fa-facebook fa-xl"> Facebook</i></a>
+                    <a href="#"><i class="fa-brands fa-instagram fa-xl"> Instagram</i></a>
+                    <a href="#"><i class="fa-brands fa-square-x-twitter fa-xl"> X</i></a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+*{
+    padding: 0; /* Padding resetten */
+    margin: 0; /* Margin resetten */
+    font-family: sans-serif; /* Standaard lettertype instellen */
+}
+
+body{
+    background: linear-gradient(#111,#222); /* Achtergrond met lineaire gradiënt */
+    width: 100%; /* Volledige breedte */
+    height: 100vh; /* Volledige viewport hoogte */
+    display: flex; /* Maak het lichaam een flex-container */
+    justify-content: center; /* Horizontaal centreren van inhoud */
+    align-items: center; /* Verticaal centreren van inhoud */
+}
+
+/* Voeg een pseudo-element toe aan de body om een achtergrondeffect te creëren */
+body::after{
+    content: ''; /* Lege inhoud aan pseudo-element toevoegen */
+    width: 100%; /* Volledige breedte */
+    height: 100%; /* Volledige hoogte */
+    background: red; /* Achtergrondkleur rood */
+    position: absolute; /* Absolute positionering */
+    clip-path: circle(40% at right 70%); /* Clip-pad instellen voor een cirkelvormige uitsnede */
+    z-index: -1; /* Achtergrond naar achteren verplaatsen */
+}
+
+.container{
+    width: 80%; /* Breedte van container instellen */
+    height: 80%; /* Hoogte van container instellen */
+    background-color: rgba(74, 68, 68, 0.614); /* Achtergrondkleur instellen met transparantie */
+    border-radius: 20px; /* Afgeronde hoeken instellen */
+    overflow: hidden; /* Inhoud verbergen die buiten de container valt */
+}
+
+nav{
+    display: flex; /* Maak de navigatiebalk een flex-container */
+    justify-content: space-between; /* Verdeel de ruimte tussen elementen */
+    align-items: center; /* Verticaal centreren van elementen */
+    width: 80%; /* Breedte instellen */
+    margin: 0 auto; /* Horizontaal centreren */
+    padding: 20px 0; /* Binnenmarge toevoegen */
+    border-radius: 10px; /* Afgeronde hoeken instellen */
+    background-color:  rgba(47, 43, 43, 0.614); /* Achtergrondkleur instellen met transparantie */
+}
+
+nav .logo{
+    color: wheat; /* Tekstkleur instellen */
+    text-decoration: none; /* Decoratie van tekst uitschakelen */
+    font-size: 32px; /* Lettergrootte instellen */
+    letter-spacing: 3px; /* Letterafstand instellen */
+    font-weight: 700; /* Vet lettertype instellen */
+    font-family: 'Edu TAS Beginner', cursive; /* Lettertype instellen */
+    font-family: 'Playpen Sans', cursive; /* Extra lettertype instellen */
+}
+
+nav ul li{
+    display: inline-block; /* Lijstitems in een regel weergeven */
+    margin: 0 6px; /* Buitenmarge toevoegen aan lijstitems */
+}
+
+nav ul li a{
+    color: white; /* Tekstkleur instellen voor koppelingsitems */
+    text-decoration: none; /* Decoratie van tekst uitschakelen voor koppelingsitems */
+    font-size: 18px; /* Lettergrootte instellen voor koppelingsitems */
+    font-weight: 500; /* Vet lettertype instellen voor koppelingsitems */
+    transition: 0.5s; /* Overgangseffect toevoegen */
+}
+
+nav ul li a:hover{
+    color: red; /* Tekstkleur wijzigen bij hover voor koppelingsitems */
+}
+
+.content{
+    display: flex; /* Maak de inhoudscontainer een flex-container */
+    justify-content: space-between; /* Verdeel de ruimte tussen elementen */
+    align-items: center; /* Verticaal centreren van elementen */
+    height: 100%; /* Volledige hoogte */
+    width: 80%; /* Breedte instellen */
+    margin: auto; /* Horizontaal centreren van de inhoud */
+}
+
+.content .text{
+    position: relative; /* Relatieve positionering */
+    bottom: 8%; /* Verschuiven naar beneden */
+    color: white; /* Tekstkleur instellen */
+    width: 40%; /* Breedte instellen */
+}
+
+.content .text h1{
+    font-size: 50px; /* Lettergrootte instellen voor h1-elementen */
+    font-weight: 700; /* Vet lettertype instellen voor h1-elementen */
+    letter-spacing: 2px; /* Letterafstand instellen */
+    padding: 10px 0; /* Binnenmarge toevoegen aan h1-elementen */
+}
+
+.content .text p{
+    font-size: 24px; /* Lettergrootte instellen voor p-elementen */
+    margin: 10px 0; /* Buitenmarge toevoegen aan p-elementen */
+    letter-spacing: 1px; /* Letterafstand instellen */
+}
+
+.content .image{
+    width: 40%; /* Breedte instellen */
+    height: 100%;
+}
+
+.content .image img{
+    width: 600px; /* Breedte van afbeeldingen instellen */
+}
+
+.text span{
+    color: red; /* Tekstkleur instellen */
+    text-shadow: 2px 4px 6px rosybrown; /* Tekstschaduw toevoegen */
+}

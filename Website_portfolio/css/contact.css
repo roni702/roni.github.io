@@ -1,0 +1,145 @@
+*{
+    padding: 0; /* Reset van de padding */
+    margin: 0; /* Reset van de margin */
+    font-family: sans-serif; /* Lettertype instellen op sans-serif */
+    color: white; /* Tekstkleur instellen op wit */
+}
+
+body{
+    background: linear-gradient(#111, #222); /* Achtergrond instellen met een lineaire gradiënt */
+    width: 100%; /* Volledige breedte */
+    height: 100vh; /* Volledige viewport hoogte */
+    display: flex; /* Weergave als flex-container */
+    justify-content: center; /* Horizontaal centreren van inhoud */
+    align-items: center; /* Verticaal centreren van inhoud */
+}
+
+body::after{
+    content: ''; /* Pseudo-element toevoegen */
+    width: 100%; /* Volledige breedte */
+    height: 100%; /* Volledige hoogte */
+    background: red; /* Achtergrondkleur instellen */
+    position: absolute; /* Absoluut gepositioneerd */
+    clip-path: circle(40% at right 70%); /* Cirkelvormige uitsnijding aan de rechterkant */
+    z-index: -1; /* Achtergrond zetten zodat deze achter de inhoud staat */
+}
+
+.container{
+    width: 80%; /* Breedte van de container instellen */
+    height: 80%; /* Hoogte van de container instellen */
+    background-color: rgba(74, 68, 68, 0.614); /* Achtergrondkleur met een alfa-waarde */
+    border-radius: 20px; /* Afgeronde hoeken instellen */
+    overflow: hidden; /* Inhoud verbergen die buiten de container valt */
+}
+
+nav{
+    display: flex; /* Weergave als flex-container */
+    justify-content: space-between; /* Verdeel de ruimte tussen elementen */
+    align-items: center; /* Verticaal centreren van inhoud */
+    width: 80%; /* Breedte van de navigatiebalk instellen */
+    margin: 0 auto; /* Horizontaal centreren van de navigatiebalk */
+    padding: 20px 0; /* Binnenmarge toevoegen aan de navigatiebalk */
+    border-radius: 10px; /* Afgeronde hoeken instellen */
+    background-color: rgba(47, 43, 43, 0.614); /* Achtergrondkleur met een alfa-waarde */
+}
+
+nav .logo{
+    color: wheat; /* Tekstkleur instellen */
+    text-decoration: none; /* Verwijder decoratie van tekstkoppelingen */
+    font-size: 32px; /* Tekstgrootte instellen */
+    letter-spacing: 3px; /* Letterafstand instellen */
+    font-weight: 700; /* Vet lettertype instellen */
+    font-family: 'Edu TAS Beginner', cursive; /* Lettertype instellen */
+    font-family: 'Playpen Sans', cursive; /* Lettertype instellen */
+}
+
+nav ul li{
+    display: inline-block; /* Weergave als inline-blok */
+    margin: 0 6px; /* Buitenmarge toevoegen aan lijstitems */
+}
+
+nav ul li a{
+    color: white; /* Tekstkleur instellen voor koppelingsitems */
+    text-decoration: none; /* Verwijder decoratie van tekstkoppelingen */
+    font-size: 18px; /* Tekstgrootte instellen */
+    font-weight: 500; /* Vet lettertype instellen */
+    transition: 0.5s; /* Overgangseffect toevoegen */
+}
+
+nav ul li a:hover{
+    color: red; /* Tekstkleur veranderen bij hover */
+}
+
+.content{
+    display: flex; /* Weergave als flex-container */
+    flex-flow: row wrap; /* Zorgen dat de rijen kunnen omvouwen op kleinere schermen */
+    font-weight: 700; /* Vet lettertype instellen */
+    letter-spacing: 1px; /* Letterafstand instellen */
+    margin-top: 2%; /* Bovenmarge toevoegen */
+}
+
+.contact{
+    display: flex; /* Weergave als flex-container */
+    flex-direction: column; /* Kolomlay-out instellen */
+}
+
+.contact span{
+    padding: 5px; /* Binnenmarge toevoegen */
+    margin: 5px; /* Buitenmarge toevoegen */
+}
+
+.contact span:nth-child(3){
+    display: flex; /* Weergave als flex-container */
+    flex-direction: column; /* Kolomlay-out instellen voor het derde element */
+}
+
+#opmerking{
+    padding-bottom: 5px; /* Ondermarge toevoegen aan element met id 'opmerking' */
+}
+
+.contactformulier > span{
+    padding: 15px; /* Binnenmarge toevoegen aan span-elementen binnen .contactformulier */
+}
+
+button{
+    width: 100px; /* Breedte van knop instellen */
+    height: 50px; /* Hoogte van knop instellen */
+    background-color: rgba(47, 43, 43, 0.614); /* Achtergrondkleur met een alfa-waarde */
+    transition: 0.5s; /* Overgangseffect toevoegen */
+}
+
+button:hover{
+    color: red; /* Tekstkleur veranderen bij hover */
+    cursor: pointer; /* Aanwijzer veranderen naar een handje bij hover */
+    border: 2px solid black; /* Randstijl toevoegen bij hover */
+    box-shadow: 2px 4px 7px rgb(220, 99, 99); /* Schaduweffect toevoegen bij hover */
+    transform: scale(1.1); /* Schaal het knopelement bij hover */
+}
+
+input{
+    width: 30%; /* Breedte van invoervelden instellen */
+    padding: 10px; /* Binnenmarge toevoegen */
+    color: #111; /* Tekstkleur instellen */
+}
+
+textarea{
+    padding: 10px; /* Binnenmarge toevoegen aan tekstvakken */
+    color: #111; /* Tekstkleur instellen */
+}
+
+.andere-contact{
+    margin: 20px; /* Buitenmarge toevoegen */
+    padding: 10px; /* Binnenmarge toevoegen */
+    display: flex; /* Weergave als flex-container */
+    justify-content: space-around; /* Verdeel de ruimte rond elementen */
+}
+
+.andere-contact i{
+    transition: 0.5s; /* Overgangseffect toevoegen */
+}
+
+.andere-contact i:hover{
+    color: red; /* Tekstkleur veranderen bij hover */
+    transform: scale(1.2); /* Vergroot het pictogram bij hover */
+    text-shadow: 2px 4px 7px rgb(220, 99, 99); /* Tekstschaduw toevoegen bij hover */
+}
