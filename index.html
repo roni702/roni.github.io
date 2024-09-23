@@ -35,7 +35,7 @@
                         <a class="nav-link" href="#projects">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="../roni.github.io/contact.html">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -148,81 +148,23 @@
     </div>
 
 
-    <div class="container mt-5" id="contact">
-        <h2>Contact</h2>
-        <p>Heeft u een vraag of wilt u samenwerken? Vul het onderstaande formulier in en ik zal zo snel mogelijk contact
-            met u opnemen.</p>
-        <div class="row">
-            <div class="col-md-6">
-                <form id="form" class="contact-form">
-                    <div class="form-group">
-                        <label for="from_name">Naam</label>
-                        <input type="text" class="form-control" name="from_name" id="from_name"
-                            placeholder="Vul uw naam in" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reply_to">E-mailadres</label>
-                        <input type="email" class="form-control" name="reply_to" id="reply_to"
-                            placeholder="Vul uw e-mailadres in" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Bericht</label>
-                        <textarea class="form-control" name="message" id="message" rows="3"
-                            placeholder="Vul uw bericht in" required></textarea>
-                    </div>
-                    <button type="submit" id="button" class="btn btn-primary">Versturen</button>
-                    <div id="response-message" class="response-message"></div> <!-- Meldingscontainer -->
-                </form>
-            </div>
-            <div class="col-md-6">
-                <div class="contact-info">
-                    <h3>Contactgegevens</h3>
-                    <p><strong>E-mail:</strong> ronymurad50@email.com</p>
-                    <p><strong>Adres:</strong> Ariënsplein 1, 7511JX Enschede</p>
-                    <p><strong>Telefoonnummer:</strong> 012-3456789</p>
-                </div>
-            </div>
+
+
+    <footer class="footer bg-dark text-white p-4">
+        <div class="container text-center">
+            <h5>Contact Gegevens</h5>
+            <p>Email: <a href="mailto: ronymurad50@gmail.com">ronymurad50@gmail.com</a></p>
+            <p>Telefoon: <a href="tel: +31615105176">+31615105176</a></p>
+            <p>Of via: <a href="../roni.github.io/contact.html">contactformulier</a></p>
+            <p>Adres: <a href="https://www.google.com/maps/search/?api=1&query=Assinklanden+98,+7542BM+Enschede+NL" target="_blank">Assinklanden 98, 7542BM Enschede NL</a></p>
         </div>
-    </div>
-
-
-    <footer>
-        dvd
     </footer>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        emailjs.init('AYuLbWMU5Dv5R8Y7Y');
-
-        const btn = document.getElementById('button');
-        const responseMessage = document.getElementById('response-message');
-
-        document.getElementById('form').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            btn.value = 'Sending...';
-
-            const serviceID = 'default_service';
-            const templateID = 'template_m7uwpj3';
-
-            emailjs.sendForm(serviceID, templateID, this)
-                .then(() => {
-                    btn.value = 'Versturen';
-                    responseMessage.textContent = 'Verzonden!';
-                    responseMessage.className = 'response-message success';
-                    responseMessage.style.display = 'block';
-                }, (err) => {
-                    btn.value = 'Versturen';
-                    responseMessage.textContent = 'Er is een fout opgetreden: ' + JSON.stringify(err);
-                    responseMessage.className = 'response-message error';
-                    responseMessage.style.display = 'block';
-                });
-        });
-    </script>
-
 
     <script src="../roni.github.io/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 
 </html>
