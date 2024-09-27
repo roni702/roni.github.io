@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function typeEffect() {
             if (index < text.length) {
                 element.innerHTML += text.charAt(index);
-                index++;
+                index++; 
                 setTimeout(typeEffect, 40); // Snelheid van het typen (100ms)
             }
         }
