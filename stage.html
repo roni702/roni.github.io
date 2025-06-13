@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactief BPV Verslag - Roni Morad</title>
+    
+    <!-- Chosen Palette: Cool Neutrals (Slate & Blue) -->
+    <!-- Application Structure Plan: A dashboard-style, single-page portfolio. It starts with a high-level summary (Hero & Dashboard), then dives into details with interactive elements (Projects, Skills Chart). The structure is designed for recruiters and supervisors to quickly grasp key achievements and skills. It transforms the linear report into a non-linear, explorable experience. The AI suggestion feature on the development point turns a weakness into a demonstration of proactive problem-solving. -->
+    <!-- Visualization & Content Choices: 
+        1. Learning Goals: Report Info (4 achieved, 1 needs development) -> Goal (Quickly show progress) -> Viz (Chart.js Donut Chart) -> Interaction (Hover to see details) -> Justification (Visually more impactful than a list) -> Library (Chart.js on Canvas).
+        2. Tech Stack: Report Info (List of tools) -> Goal (Showcase technical proficiency) -> Viz (Styled HTML tags/badges) -> Interaction (Hover effects) -> Justification (Modern, clean presentation for skills) -> Library/Method (Tailwind CSS).
+        3. Development Point: Report Info ('Op tijd komen' issue) -> Goal (Demonstrate proactivity) -> Viz (Button + Modal) -> Interaction (Click to get AI-powered coaching) -> Justification (Innovative and shows a commitment to growth) -> Library/Method (Vanilla JS Fetch for Gemini API).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #334155;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            width: 100%;
+            max-width: 300px;
+            height: 250px;
+            max-height: 350px;
+        }
+        @media (min-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .section-fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-content {
+            transition: transform 0.25s ease;
+        }
+        .org-chart-node {
+            @apply bg-blue-500 text-white p-2 rounded-full text-xs font-semibold flex items-center justify-center;
+            min-width: 80px;
+            min-height: 32px;
+            text-align: center;
+        }
+        .org-chart-level {
+            @apply flex justify-center gap-4 py-4;
+            flex-wrap: wrap;
+        }
+        .org-chart-connector {
+            @apply w-0.5 bg-slate-400 mx-auto;
+        }
+        .org-chart-horizontal-line {
+            @apply h-0.5 bg-slate-400;
+        }
+        .org-chart-vertical-line {
+            @apply w-0.5 bg-slate-400 h-4 mx-auto;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="font-bold text-lg sm:text-xl text-slate-800">Roni Morad | Stageverslag</div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#dashboard" class="nav-link text-slate-600 hover:text-blue-600">Dashboard</a>
+                    <a href="#bedrijfsinformatie" class="nav-link text-slate-600 hover:text-blue-600">Bedrijf</a>
+                    <a href="#projecten" class="nav-link text-slate-600 hover:text-blue-600">Projecten</a>
+                    <a href="#ontwikkeling" class="nav-link text-slate-600 hover:text-blue-600">Ontwikkeling</a>
+                    <a href="#reflectie" class="nav-link text-slate-600 hover:text-blue-600">Reflectie</a>
+                </div>
+                <a href="https://www.supportflex.nl" target="_blank" class="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm">Supportflex</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 md:py-16">
+
+        <section class="text-center mb-16 md:mb-24 section-fade-in">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 mb-4">Mijn Stage als Software Developer</h1>
+            <p class="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+                Een interactief overzicht van mijn werkzaamheden, projecten en persoonlijke groei bij Supportflex gedurende de periode 3 februari t/m 20 juni 2025.
+            </p>
+        </section>
+
+        <section id="dashboard" class="mb-16 md:mb-24 section-fade-in">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-8 text-center">Stage Dashboard</h2>
+            <p class="text-slate-600 text-center max-w-2xl mx-auto mb-10 text-base sm:text-lg">
+                Dit dashboard biedt een snel overzicht van mijn stagegegevens, de gebruikte technologieën en mijn voortgang op de leerdoelen. Het is ontworpen om direct inzicht te geven in de kernaspecten van mijn stageperiode.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="md:col-span-2 bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-6">Kerninformatie & Tech Stack</h3>
+                    <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 mb-8">
+                        <div>
+                            <h4 class="font-semibold text-slate-500 mb-1 text-base">Bedrijf</h4>
+                            <p class="text-lg text-slate-800">Supportflex</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-500 mb-1 text-base">Rol</h4>
+                            <p class="text-lg text-slate-800">Stagiair Software Developer</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-500 mb-1 text-base">Begeleider</h4>
+                            <p class="text-lg text-slate-800">Matthijs Hofstede</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-500 mb-1 text-base">Periode</h4>
+                            <p class="text-lg text-slate-800">Feb - Jun 2025</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-slate-500 mb-3 text-base">Gebruikte technologieën</h4>
+                        <div class="flex flex-wrap gap-2 sm:gap-3">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium text-sm">WordPress</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium text-sm">Elementor</span>
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-medium text-sm">JavaScript</span>
+                            <span class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full font-medium text-sm">Webhosting (Antagonist)</span>
+                            <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full font-medium text-sm">PHP</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium text-sm">Microsoft Teams</span>
+                            <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-medium text-sm">E-mail (Outlook)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg flex flex-col justify-center">
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4 text-center">Voortgang Leerdoelen</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm text-center mb-4">
+                        Deze grafiek visualiseert de status van mijn vooraf gedefinieerde leerdoelen. Zweef over de segmenten voor meer details.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="learningGoalsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bedrijfsinformatie" class="mb-16 md:mb-24 section-fade-in">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-8 text-center">Over Supportflex</h2>
+            <p class="text-slate-600 text-center max-w-2xl mx-auto mb-10 text-base sm:text-lg">
+                Duik dieper in de achtergrond van Supportflex, inclusief de geschiedenis, de klantenkring en de organisatiestructuur. Dit geeft een beter beeld van de context van mijn stage.
+            </p>
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg mb-8">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">Geschiedenis van Supportflex</h3>
+                <p class="text-slate-600 mb-4 text-base sm:text-lg">
+                    Supportflex is opgericht in **2009 in Enschede**, vanuit de duidelijke visie dat websites succesvol dienen te zijn voor hun gebruikers en eigenaren. In de beginfase lag de focus uitsluitend op **zoekmachine optimalisatie (SEO)**. Door de jaren heen is het dienstenaanbod significant uitgebreid met **Social Media marketing** en diverse **advertising**-mogelijkheden. Recentelijk heeft Supportflex ook zijn expertise verbreed naar **webdesign en algemene vormgeving**, inclusief drukwerk en gevelbelettering, om een completere service te kunnen bieden aan klanten.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg mb-8">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">Type Klanten</h3>
+                <p class="text-slate-600 mb-4 text-base sm:text-lg">
+                    Supportflex richt zich primair op **lokale online marketing**. Deze benadering is het meest effectief voor bedrijven met een fysieke vestiging en een lokale klantenkring. Dit omvat voornamelijk het **onderste en midden van het MKB (Midden- en Kleinbedrijf)**, waarbij maatwerkoplossingen worden geboden die direct bijdragen aan hun lokale zichtbaarheid en groei.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-6 text-center">Organisatiestructuur</h3>
+                <p class="text-slate-600 text-center mb-6 text-base sm:text-lg">
+                    Een vereenvoudigde weergave van het organogram van Supportflex, wat inzicht geeft in de interne structuur en afdelingen.
+                </p>
+                <div class="flex flex-col items-center justify-center py-4">
+                    <div class="org-chart-node bg-blue-600">Directie</div>
+                    <div class="org-chart-connector h-8"></div>
+                    <div class="flex justify-center w-full">
+                        <div class="w-1/3 flex flex-col items-center">
+                            <div class="org-chart-vertical-line h-4"></div>
+                            <div class="org-chart-node bg-blue-500">Traffic</div>
+                            <div class="org-chart-connector h-8"></div>
+                            <div class="org-chart-node bg-blue-400">Sales manager</div>
+                            <div class="org-chart-connector h-8"></div>
+                            <div class="org-chart-node bg-blue-300">Sales medewerker</div>
+                        </div>
+                        <div class="w-1/3 flex flex-col items-center">
+                            <div class="org-chart-vertical-line h-4"></div>
+                            <div class="org-chart-node bg-blue-500">Administratie</div>
+                        </div>
+                        <div class="w-1/3 flex flex-col items-center">
+                            <div class="org-chart-vertical-line h-4"></div>
+                            <div class="org-chart-node bg-blue-500">Operationeel manager</div>
+                            <div class="org-chart-connector h-8"></div>
+                            <div class="flex justify-center w-full">
+                                <div class="w-1/2 flex flex-col items-center">
+                                    <div class="org-chart-vertical-line h-4"></div>
+                                    <div class="org-chart-node bg-blue-400">Kwaliteitsmedewerker</div>
+                                </div>
+                                <div class="w-1/2 flex flex-col items-center">
+                                    <div class="org-chart-vertical-line h-4"></div>
+                                    <div class="org-chart-horizontal-line w-full"></div>
+                                    <div class="flex justify-between w-full mt-1">
+                                        <div class="flex flex-col items-center w-1/2">
+                                            <div class="org-chart-vertical-line h-4"></div>
+                                            <div class="org-chart-node bg-blue-400">Teamleider</div>
+                                            <div class="org-chart-connector h-8"></div>
+                                            <div class="org-chart-node bg-blue-300">Online marketeer (Jr./Mr./Sr.)</div>
+                                        </div>
+                                        <div class="flex flex-col items-center w-1/2">
+                                            <div class="org-chart-vertical-line h-4"></div>
+                                            <div class="org-chart-node bg-blue-400">Teamleider</div>
+                                            <div class="org-chart-connector h-8"></div>
+                                            <div class="org-chart-node bg-blue-300">Online marketeer (Jr./Mr./Sr.)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projecten" class="mb-16 md:mb-24 section-fade-in">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-8 text-center">Projecten in de Spotlight</h2>
+            <p class="text-slate-600 text-center max-w-2xl mx-auto mb-10 text-base sm:text-lg">
+                Hieronder vindt u een gedetailleerd overzicht van twee belangrijke projecten die ik tijdens mijn stage heb uitgevoerd. Deze taken tonen mijn praktische vaardigheden in webdesign en -implementatie.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">Taak 1: Van ontwerp naar klantvriendelijke en responsive website</h3>
+                    <p class="text-slate-600 mb-6 text-base sm:text-lg">Dit project omvatte het complete proces van het transformeren van een initieel ontwerp naar een volledig functionele, klantvriendelijke en responsieve website, geoptimaliseerd voor conversie.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-700 text-base">Voorbereiding</h4>
+                            <ul class="list-disc list-inside text-slate-600 mt-2 text-sm sm:text-base">
+                                <li>Content verzamelen & planning opstellen</li>
+                                <li>WordPress-structuur voorbereiden</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700 text-base">Uitvoering</h4>
+                            <ul class="list-disc list-inside text-slate-600 mt-2 text-sm sm:text-base">
+                                <li>Responsive design in Elementor</li>
+                                <li>SEO-elementen implementeren</li>
+                                <li>Uitgebreid testen op diverse devices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">Taak 2: Hosting en live zetten van een nieuwe website</h3>
+                    <p class="text-slate-600 mb-6 text-base sm:text-lg">Dit project betrof de volledige technische voorbereiding en succesvolle livegang van een gloednieuwe website, waarbij alle aspecten van hosting en deployment werden beheerd.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-700 text-base">Voorbereiding</h4>
+                            <ul class="list-disc list-inside text-slate-600 mt-2 text-sm sm:text-base">
+                                <li>Hostingomgeving inrichten</li>
+                                <li>Database en domein koppelen</li>
+                                <li>SSL-certificaat installeren</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700 text-base">Uitvoering</h4>
+                            <ul class="list-disc list-inside text-slate-600 mt-2 text-sm sm:text-base">
+                                <li>Website migreren via FTP</li>
+                                <li>Functionaliteit en laadsnelheid testen</li>
+                                <li>Beveiligingsinstellingen activeren</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ontwikkeling" class="mb-16 md:mb-24 section-fade-in">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-8 text-center">Persoonlijke Groei & Ontwikkeling</h2>
+            <p class="text-slate-600 text-center max-w-2xl mx-auto mb-10 text-base sm:text-lg">
+                In deze sectie vindt u een overzicht van mijn behaalde leerdoelen en een specifiek ontwikkelpunt. De AI-coach kan u voorzien van praktische suggesties voor verbetering van dit ontwikkelpunt.
+            </p>
+            <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">Behaalde Leerdoelen</h3>
+                        <ul class="space-y-3 text-base sm:text-lg">
+                            <li class="flex items-start"><span class="text-green-500 mr-3 mt-1">✔</span><span>Effectiever communiceren met collega's</span></li>
+                            <li class="flex items-start"><span class="text-green-500 mr-3 mt-1">✔</span><span>WordPress & Elementor webdesign verbeteren</span></li>
+                            <li class="flex items-start"><span class="text-green-500 mr-3 mt-1">✔</span><span>Feedback verwerken en zelfvertrouwen opbouwen</span></li>
+                            <li class="flex items-start"><span class="text-green-500 mr-3 mt-1">✔</span><span>Hosting en deployment van websites beheersen</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">Ontwikkelpunt</h3>
+                        <h4 class="font-semibold text-slate-700 text-base">Op tijd komen</h4>
+                        <p class="text-slate-600 mt-2 mb-4 text-sm sm:text-base">Door afhankelijkheid van het OV was dit een uitdaging. Dit blijft een belangrijk aandachtspunt voor mijn professionele ontwikkeling.</p>
+                        <button id="getSuggestionsBtn" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-transform transform hover:scale-105 text-sm sm:text-base">
+                            Krijg AI-suggesties
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="reflectie" class="text-center max-w-3xl mx-auto section-fade-in">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-6">Reflectie en Dankwoord</h2>
+            <p class="text-slate-600 text-center max-w-2xl mx-auto mb-10 text-base sm:text-lg">
+                In deze afsluitende sectie reflecteer ik op de algehele stage-ervaring en spreek ik mijn waardering uit voor de begeleiding en kansen die mij geboden zijn.
+            </p>
+            <p class="text-lg sm:text-xl text-slate-600 mb-6">
+                Mijn stage bij Supportflex was een buitengewoon waardevolle en leerzame ervaring. Ik heb niet alleen mijn technische kennis en praktische vaardigheden op het gebied van webdesign en WordPress aanzienlijk verdiept, maar ook cruciale soft skills zoals communicatie en zelfvertrouwen versterkt. De overgrote meerderheid van de gestelde leerdoelen is succesvol behaald, wat mijn voorbereiding op de dynamische uitdagingen binnen de webdesign- en front-endwereld aanzienlijk heeft verbeterd. Ik voel me nu sterker en meer capabel, en kijk ernaar uit om mijn opgedane kennis en ervaring in toekomstige projecten en rollen in de praktijk te brengen.
+            </p>
+            <p class="text-lg sm:text-xl text-slate-600">
+                Ik wil graag mijn oprechte dank uitspreken aan Matthijs Hofstede, mijn directe stagebegeleider, en het gehele team van Supportflex. Hun uitstekende begeleiding, constructieve feedback en het onvoorwaardelijke vertrouwen dat zij in mij hebben gesteld, waren essentieel voor mijn groei. Deze stageperiode heeft mij voorzien van essentiële inzichten en praktische vaardigheden die ik als een fundament meeneem in mijn verdere professionele ontwikkeling.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 mt-16 md:mt-24 py-8">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <p class="text-sm sm:text-base">&copy; 2025 Roni Morad. Dit interactieve verslag is gemaakt als onderdeel van mijn opleiding Software Developer.</p>
+        </div>
+    </footer>
+
+    <div id="aiModal" class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="modal-content bg-white w-full max-w-lg p-6 sm:p-8 rounded-xl shadow-2xl transform scale-95">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800">AI Coach: Suggesties voor Punctualiteit</h3>
+                <button id="closeModalBtn" class="text-slate-400 hover:text-slate-800 text-3xl">&times;</button>
+            </div>
+            <div id="modalLoading" class="text-center py-8">
+                <div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
+                <p class="mt-4 text-slate-600 text-base">Een moment, de AI analyseert de situatie...</p>
+            </div>
+            <div id="modalContent" class="text-slate-600 space-y-3 hidden text-base"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('learningGoalsChart');
+            if(ctx) {
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Behaalde Leerdoelen', 'Ontwikkelpunt'],
+                        datasets: [{
+                            label: 'Voortgang',
+                            data: [4, 1],
+                            backgroundColor: [
+                                'rgba(59, 130, 246, 0.8)',
+                                'rgba(249, 115, 22, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(59, 130, 246, 1)',
+                                'rgba(249, 115, 22, 1)'
+                            ],
+                            borderWidth: 1,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        family: "'Inter', sans-serif"
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                titleFont: { family: "'Inter', sans-serif" },
+                                bodyFont: { family: "'Inter', sans-serif" },
+                            }
+                        }
+                    }
+                });
+            }
+
+            const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            const modal = document.getElementById('aiModal');
+            const getSuggestionsBtn = document.getElementById('getSuggestionsBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalLoading = document.getElementById('modalLoading');
+            const modalContent = document.getElementById('modalContent');
+            
+            const openModal = () => {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => { 
+                    modal.classList.add('opacity-100');
+                    modal.querySelector('.modal-content').classList.remove('scale-95');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('opacity-100');
+                modal.querySelector('.modal-content').classList.add('scale-95');
+                setTimeout(() => { 
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 250);
+            };
+
+            getSuggestionsBtn.addEventListener('click', async () => {
+                openModal();
+                modalLoading.style.display = 'block';
+                modalContent.style.display = 'none';
+
+                const prompt = `Gebaseerd op de volgende context uit een Nederlands stageverslag, geef 3 tot 4 concrete en professionele tips voor het leerdoel 'Op tijd komen'. De reden die wordt gegeven is afhankelijkheid van het openbaar vervoer ('de trein reed slechts elk half uur'). Formuleer de suggesties als een genummerde lijst in het Nederlands, met een korte, bemoedigende inleiding.
+
+                Context: "Niet volledig behaald leerdoel: Op tijd komen. Hoewel ik mij had voorgenomen altijd stipt op tijd te komen, lukte dit niet altijd consequent. Dit was voornamelijk te wijten aan externe factoren zoals beperkingen in het openbaar vervoer; de trein reed slechts elk half uur, wat bij eventuele vertragingen direct leidde tot latere aankomst. Mijn stagebegeleider was hiervan op de hoogte en toonde begrip voor de situatie. Dit blijft een belangrijk aandachtspunt voor mijn verdere persoonlijke en professionele ontwikkeling, waarbij ik zoek naar alternatieve strategieën om deze uitdaging te mitigeren."`;
+                
+                try {
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] })
+                    });
+                    
+                    if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                    
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates[0].content.parts[0].text) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        modalContent.innerHTML = text.replace(/(\d\.)/g, '<br><strong class="text-slate-800">$1</strong>').replace(/^<br>/, '');
+                    } else {
+                        throw new Error('Geen geldige content in API-respons.');
+                    }
+                } catch (error) {
+                    console.error("Fout bij het aanroepen van de Gemini API:", error);
+                    modalContent.innerHTML = "Er is een fout opgetreden bij het ophalen van de suggesties. Probeer het later opnieuw.";
+                } finally {
+                    modalLoading.style.display = 'none';
+                    modalContent.style.display = 'block';
+                }
+            });
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape" && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
