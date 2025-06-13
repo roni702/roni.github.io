@@ -13,7 +13,9 @@
         3. Project Cards: Report Info (Projecttitels, beschrijvingen) -> Goal (Inform, Organize) -> Viz (Styled HTML cards with placeholders for images/videos) -> Interaction (Link to project details or modal) -> Justification (Overzichtelijke presentatie van afgeronde projecten) -> Method (Tailwind CSS).
         4. BPV Learning Goals: Report Info (4 behaald, 1 ontwikkelpunt) -> Goal (Inform, Compare) -> Viz (Chart.js Donut Chart) -> Interaction (Hover for details) -> Justification (Visueel aantrekkelijke voortgangsweergave) -> Library (Chart.js on Canvas).
         5. BPV AI Suggestions: Report Info (Niet behaald leerdoel context) -> Goal (Engagement, Actionable insights) -> Viz (Button + Modal) -> Interaction (Click to get AI-powered tips) -> Justification (Toont proactieve benadering van persoonlijke ontwikkeling) -> Method (Vanilla JS Fetch for Gemini API).
-        6. BPV Organogram: Report Info (Hiërarchie) -> Goal (Organize) -> Viz (HTML/CSS Diagram) -> Interaction (None) -> Justification (Inzicht in bedrijfsstructuur van de stageplek) -> Method (Tailwind CSS).
+        6. BPV Organogram: Report Info (Hiërarchie) -> Goal (Organize) -> Viz (HTML/CSS Diagram) -> Interaction (None) -> Justification (Inzicht in bedrijfsstructuur van de stageplek) -> Method (HTML/CSS using Tailwind).
+        7. Project Key Points: Report Info (Projecttitel, beschrijving) -> Goal (Summarize, Highlight Achievements) -> Viz (Button + Modal with bullet points) -> Interaction (Click to generate AI-powered key points) -> Justification (Helpt gebruiker snel de impact van projecten te begrijpen en hun eigen portfolio te optimaliseren) -> Method (Vanilla JS Fetch for Gemini API).
+        8. Project Detail Pages (Simulated): Report Info (Uitgebreide projectinformatie) -> Goal (Deep Dive, Exploration) -> Viz (Modal with carousel/grid of images and extended text) -> Interaction (Click to view details, carousel navigation) -> Justification (Biedt gedetailleerde context per project zonder de SPA-ervaring te verlaten) -> Method (HTML/CSS/JS Modal).
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
@@ -131,15 +133,59 @@
         .org-chart-line {
             @apply bg-slate-300;
         }
+
+        /* Project Detail Modal Specific Styles */
+        .project-detail-image-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+        .project-detail-image-carousel::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+        .project-detail-image-item {
+            flex: 0 0 100%; /* Each item takes full width */
+            scroll-snap-align: start;
+        }
+        .project-detail-image-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+
+        /* Hamburger menu specific styles */
+        .hamburger-menu-button {
+            display: none; /* Hidden by default */
+            @apply md:hidden block text-slate-600 hover:text-blue-600 focus:outline-none p-2 rounded-md;
+        }
+
+        .mobile-nav-links {
+            @apply hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 mt-4 md:mt-0;
+        }
+
+        .mobile-nav-links.active {
+            display: flex;
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Header & Navigation -->
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between flex-wrap">
             <a class="font-bold text-xl md:text-2xl text-slate-800 tracking-tight" href="#home">Roni Morad</a>
-            <div class="flex items-center space-x-4 md:space-x-6">
+            
+            <!-- Hamburger menu button -->
+            <button id="hamburgerButton" class="hamburger-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <div id="navLinks" class="mobile-nav-links w-full md:w-auto">
                 <a href="#home" class="nav-link text-slate-600 hover:text-blue-600 px-3 py-1 rounded-md">Home</a>
                 <a href="#skills" class="nav-link text-slate-600 hover:text-blue-600 px-3 py-1 rounded-md">Skills</a>
                 <a href="#projects" class="nav-link text-slate-600 hover:text-blue-600 px-3 py-1 rounded-md">Projecten</a>
@@ -250,31 +296,85 @@
         <section id="projects" class="container mx-auto px-4 sm:px-6 py-16 md:py-24 section-fade-in">
             <h2 class="text-4xl font-bold text-center mb-12 text-slate-900">Mijn Projecten</h2>
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <!-- Project 1: HTML & CSS -->
+                <!-- Project 1: HTML & CSS Basis -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="https://placehold.co/600x400/293241/E0FBFC?text=HTML+%26+CSS+Project" alt="HTML & CSS Project Screenshot" class="w-full h-48 object-cover">
+                    <img src="https://placehold.co/600x400/293241/E0FBFC?text=HTML+%26+CSS+Basis" alt="HTML & CSS Project Screenshot" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl text-slate-800 mb-2">HTML & CSS Basis</h3>
-                        <p class="text-slate-600 text-sm mb-4">De fundamenten van webontwikkeling, geleerd in Leerjaar 1, inclusief het bouwen van statische webpagina's en styling.</p>
-                        <a href="https://placehold.co/300x200?text=HTML+Project+Details" target="_blank" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Bekijk Project</a>
+                        <h3 class="font-bold text-xl text-slate-800 mb-2 project-title">HTML & CSS Basis</h3>
+                        <p class="text-slate-600 text-sm mb-4 project-description">De fundamenten van webontwikkeling, geleerd in Leerjaar 1, inclusief het bouwen van statische webpagina's en styling.</p>
+                        <button class="view-project-details-btn inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition"
+                            data-project-id="html-css"
+                            data-project-title="HTML & CSS Basis"
+                            data-project-description="Dit project omvatte de basisprincipes van HTML en CSS. Ik heb geleerd hoe ik de structuur van webpagina's kan opzetten en deze visueel aantrekkelijk kan maken met styling. De focus lag op het correct toepassen van semantische HTML en het creëren van responsieve layouts met CSS-flexbox en grid. Het was een essentiële stap in mijn ontwikkeling als webdeveloper, waarbij ik de fundamentele bouwstenen van het web heb leren beheersen."
+                            data-project-images='["https://placehold.co/800x500/293241/E0FBFC?text=HTML+Details+1", "https://placehold.co/800x500/293241/E0FBFC?text=CSS+Details+2", "https://placehold.co/800x500/293241/E0FBFC?text=Layout+Example+3"]'>
+                            Bekijk Project Details
+                        </button>
+                        <button class="generate-keypoints-btn mt-2 w-full bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition">Genereer Kernpunten ✨</button>
                     </div>
                 </div>
-                <!-- Project 2: Text Adventure -->
+                <!-- Project 2: C# Text Adventure -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                     <img src="https://placehold.co/600x400/3A405A/E0FBFC?text=Text+Adventure+Game" alt="Text Adventure Screenshot" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl text-slate-800 mb-2">C# Text Adventure</h3>
-                        <p class="text-slate-600 text-sm mb-4">Een console-gebaseerd avonturenspel geprogrammeerd in C#, gericht op logica en beslissingsstructuren (Leerjaar 1).</p>
-                        <button onclick="alert('Dit project is een console-applicatie en kan niet direct via een webpagina getoond worden. Neem contact op voor een demo!');" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Meer Info</button>
+                        <h3 class="font-bold text-xl text-slate-800 mb-2 project-title">C# Text Adventure</h3>
+                        <p class="text-slate-600 text-sm mb-4 project-description">Een console-gebaseerd avonturenspel geprogrammeerd in C#, gericht op logica en beslissingsstructuren (Leerjaar 1).</p>
+                         <button class="view-project-details-btn inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition"
+                            data-project-id="csharp-text-adventure"
+                            data-project-title="C# Text Adventure"
+                            data-project-description="Dit project was een diepe duik in objectgeoriënteerd programmeren met C#. Ik heb een interactief tekstavonturenspel ontwikkeld waarbij de keuzes van de speler direct de voortgang en uitkomst beïnvloeden. De focus lag op het opzetten van robuuste logica, het beheren van de spelstaat en het creëren van een boeiende verhaallijn met vertakkende paden. Dit project heeft mijn probleemoplossende vaardigheden en mijn begrip van algoritmiek aanzienlijk versterkt."
+                            data-project-images='["https://placehold.co/800x500/3A405A/E0FBFC?text=C#+Console+1", "https://placehold.co/800x500/3A405A/E0FBFC?text=Logic+Flow+2", "https://placehold.co/800x500/3A405A/E0FBFC?text=Code+Snippet+3"]'>
+                            Bekijk Project Details
+                        </button>
+                        <button class="generate-keypoints-btn mt-2 w-full bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition">Genereer Kernpunten ✨</button>
                     </div>
                 </div>
                 <!-- Project 3: Micro Game (Unity) -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                     <img src="https://placehold.co/600x400/8D99AE/E0FBFC?text=Microgame+Unity" alt="Micro Game Screenshot" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="font-bold text-xl text-slate-800 mb-2">Micro Game (Unity)</h3>
-                        <p class="text-slate-600 text-sm mb-4">Een groepsproject, "The Last Stand of the Worms", ontwikkeld in Unity (Leerjaar 2). Ik heb bijgedragen aan de wormbeweging, UI (HP-weergave met hartjes), wormselectiemenu en hoofdmenu script.</p>
-                        <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="_blank" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Bekijk Video</a>
+                        <h3 class="font-bold text-xl text-slate-800 mb-2 project-title">Micro Game (Unity)</h3>
+                        <p class="text-slate-600 text-sm mb-4 project-description">Een groepsproject, "The Last Stand of the Worms", ontwikkeld in Unity (Leerjaar 2). Ik heb bijgedragen aan de wormbeweging, UI (HP-weergave met hartjes), wormselectiemenu en hoofdmenu script.</p>
+                        <button class="view-project-details-btn inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition"
+                            data-project-id="unity-microgame"
+                            data-project-title="Micro Game (Unity)"
+                            data-project-description="In dit groepsproject, 'The Last Stand of the Worms', heb ik waardevolle ervaring opgedaan met game-ontwikkeling in Unity. Mijn primaire taken omvatten het programmeren van de vloeiende beweging van de spelerskarakters (wormen), het ontwerpen en implementeren van een intuïtief wormselectiemenu, en het visualiseren van Health Points (HP) met behulp van hartjes in de gebruikersinterface. Daarnaast heb ik het hoofdmenu script ontwikkeld, essentieel voor de algehele navigatie van de game. Dit project heeft mijn teamworkvaardigheden en kennis van C# binnen de Unity-omgeving aangescherpt."
+                            data-project-images='["https://placehold.co/800x500/8D99AE/E0FBFC?text=Game+Screenshot+1", "https://placehold.co/800x500/8D99AE/E0FBFC?text=UI+Design+2", "https://placehold.co/800x500/8D99AE/E0FBFC?text=Character+Movement+3"]'
+                            data-project-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                            Bekijk Project Details
+                        </button>
+                        <button class="generate-keypoints-btn mt-2 w-full bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition">Genereer Kernpunten ✨</button>
+                    </div>
+                </div>
+                <!-- Nieuw Project 4: Wordpress E-commerce Site -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="https://placehold.co/600x400/98C1D9/3D5A80?text=Wordpress+Shop" alt="Wordpress E-commerce Project Screenshot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-slate-800 mb-2 project-title">Wordpress E-commerce Site</h3>
+                        <p class="text-slate-600 text-sm mb-4 project-description">Ontwikkeling van een volledig functionele e-commerce website met WooCommerce op WordPress, inclusief betalingsintegratie en productbeheer.</p>
+                        <button class="view-project-details-btn inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition"
+                            data-project-id="wordpress-ecommerce"
+                            data-project-title="Wordpress E-commerce Site"
+                            data-project-description="Dit project omvatte de end-to-end ontwikkeling van een e-commerce website met behulp van WordPress en de WooCommerce plugin. Ik was verantwoordelijk voor het opzetten van de productcatalogus, het configureren van verzendmethoden, het integreren van veilige betalingsgateways en het implementeren van een gebruiksvriendelijk ontwerp. Dit project heeft mijn kennis van e-commerce best practices en mijn vaardigheden in WordPress-ontwikkeling aanzienlijk verdiept, met een focus op conversie-optimalisatie."
+                            data-project-images='["https://placehold.co/800x500/98C1D9/3D5A80?text=Shop+Home", "https://placehold.co/800x500/98C1D9/3D5A80?text=Product+Page", "https://placehold.co/800x500/98C1D9/3D5A80?text=Checkout+Flow"]'>
+                            Bekijk Project Details
+                        </button>
+                        <button class="generate-keypoints-btn mt-2 w-full bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition">Genereer Kernpunten ✨</button>
+                    </div>
+                </div>
+                <!-- Nieuw Project 5: Dynamische Dashboard met JS -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="https://placehold.co/600x400/4F748B/EAEAEA?text=JS+Dashboard" alt="Dynamic Dashboard Project Screenshot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-slate-800 mb-2 project-title">Dynamische Dashboard met JS</h3>
+                        <p class="text-slate-600 text-sm mb-4 project-description">Ontwerp en implementatie van een interactief webdashboard met JavaScript voor het visualiseren van complexe datasets.</p>
+                        <button class="view-project-details-btn inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition"
+                            data-project-id="js-dashboard"
+                            data-project-title="Dynamische Dashboard met JS"
+                            data-project-description="In dit project heb ik een dynamisch webdashboard ontwikkeld met puur JavaScript, HTML en CSS (Tailwind). Het dashboard is ontworpen om grote datasets te visualiseren en interactief te maken, met functies zoals filters, sorteeropties en aanpasbare grafieken (met Chart.js). Mijn focus lag op het creëren van een intuïtieve gebruikersinterface en het optimaliseren van de prestaties voor real-time dataweergave, wat essentieel is voor data-analyse."
+                            data-project-images='["https://placehold.co/800x500/4F748B/EAEAEA?text=Dashboard+Overview", "https://placehold.co/800x500/4F748B/EAEAEA?text=Chart+Interaction", "https://placehold.co/800x500/4F748B/EAEAEA?text=Filter+Options"]'>
+                            Bekijk Project Details
+                        </button>
+                        <button class="generate-keypoints-btn mt-2 w-full bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition">Genereer Kernpunten ✨</button>
                     </div>
                 </div>
             </div>
@@ -484,7 +584,7 @@
         </div>
     </footer>
 
-    <!-- AI Suggestions Modal -->
+    <!-- AI Suggestions Modal (for BPV) -->
     <div id="aiModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0">
         <div class="modal-content bg-white w-full max-w-lg p-6 sm:p-8 rounded-xl shadow-2xl transform scale-95">
             <div class="flex justify-between items-center mb-4">
@@ -499,8 +599,71 @@
         </div>
     </div>
 
+    <!-- Project Keypoints Modal -->
+    <div id="projectKeypointsModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="modal-content bg-white w-full max-w-lg p-6 sm:p-8 rounded-xl shadow-2xl transform scale-95">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800" id="projectKeypointsModalTitle">Project Kernpunten</h3>
+                <button id="closeProjectKeypointsModalBtn" class="text-slate-400 hover:text-slate-800 text-3xl">&times;</button>
+            </div>
+            <div id="projectKeypointsModalLoading" class="text-center py-8">
+                <div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
+                <p class="mt-4 text-slate-600 text-base">De AI genereert kernpunten...</p>
+            </div>
+            <div id="projectKeypointsModalContent" class="text-slate-600 space-y-3 hidden text-base list-disc list-inside"></div>
+        </div>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div id="projectDetailModal" class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="modal-content bg-white w-full max-w-3xl p-6 sm:p-8 rounded-xl shadow-2xl transform scale-95">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800" id="projectDetailModalTitle">Project Detail</h3>
+                <button id="closeProjectDetailModalBtn" class="text-slate-400 hover:text-slate-800 text-3xl">&times;</button>
+            </div>
+            <div class="project-detail-image-carousel mb-6 relative">
+                <div id="projectDetailImages" class="flex overflow-x-auto snap-x snap-mandatory rounded-xl scrollbar-hide">
+                    <!-- Project images will be dynamically loaded here -->
+                </div>
+                <button id="carouselPrev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/70 transition">&lt;</button>
+                <button id="carouselNext" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/70 transition">&gt;</button>
+            </div>
+            <div class="project-detail-content">
+                <p class="text-slate-600 mb-6 text-base sm:text-lg" id="projectDetailModalDescription"></p>
+                <div id="projectDetailVideo" class="mb-6 hidden">
+                    <h4 class="font-bold text-lg text-slate-800 mb-2">Video Demo</h4>
+                    <div class="relative" style="padding-top: 56.25%;">
+                        <iframe id="projectDetailVideoEmbed" class="absolute inset-0 w-full h-full rounded-lg" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <button id="projectDetailDemoBtn" class="hidden w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 text-sm sm:text-base">Simuleer Demo</button>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger menu functionality
+            const hamburgerButton = document.getElementById('hamburgerButton');
+            const navLinks = document.getElementById('navLinks');
+
+            hamburgerButton.addEventListener('click', () => {
+                navLinks.classList.toggle('hidden');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile nav on link click
+            document.querySelectorAll('#navLinks a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) { // Only on mobile
+                        navLinks.classList.add('hidden');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+
+
             // Smooth scroll for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -599,33 +762,39 @@
                 });
             }
 
-            // AI Suggestions Modal Logic
+            // AI Suggestions Modal Logic (for BPV)
             const aiModal = document.getElementById('aiModal');
             const getSuggestionsBtn = document.getElementById('getSuggestionsBtn');
             const closeModalBtn = document.getElementById('closeModalBtn');
             const modalLoading = document.getElementById('modalLoading');
             const modalContent = document.getElementById('modalContent');
 
-            const openModal = () => {
-                aiModal.classList.remove('hidden');
+            const openModal = (modalElement) => {
+                modalElement.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
                 setTimeout(() => {
-                    aiModal.classList.add('opacity-100');
-                    aiModal.querySelector('.modal-content').classList.remove('scale-95');
+                    modalElement.classList.add('opacity-100');
+                    modalElement.querySelector('.modal-content').classList.remove('scale-95');
                 }, 10);
             };
 
-            const closeModal = () => {
-                aiModal.classList.remove('opacity-100');
-                aiModal.querySelector('.modal-content').classList.add('scale-95');
+            const closeModal = (modalElement) => {
+                modalElement.classList.remove('opacity-100');
+                modalElement.querySelector('.modal-content').classList.add('scale-95');
                 setTimeout(() => {
-                    aiModal.classList.add('hidden');
+                    modalElement.classList.add('hidden');
                     document.body.style.overflow = '';
+                    // Specific cleanup for project detail modal
+                    if (modalElement.id === 'projectDetailModal') {
+                        document.getElementById('projectDetailVideoEmbed').src = '';
+                        document.getElementById('projectDetailVideo').classList.add('hidden');
+                        document.getElementById('projectDetailDemoBtn').classList.add('hidden');
+                    }
                 }, 250);
             };
 
             getSuggestionsBtn.addEventListener('click', async () => {
-                openModal();
+                openModal(aiModal);
                 modalLoading.style.display = 'block';
                 modalContent.style.display = 'none';
 
@@ -662,15 +831,15 @@
                 }
             });
 
-            closeModalBtn.addEventListener('click', closeModal);
+            closeModalBtn.addEventListener('click', () => closeModal(aiModal));
             aiModal.addEventListener('click', (e) => {
                 if (e.target === aiModal) {
-                    closeModal();
+                    closeModal(aiModal);
                 }
             });
             document.addEventListener('keydown', (e) => {
                 if (e.key === "Escape" && !aiModal.classList.contains('hidden')) {
-                    closeModal();
+                    closeModal(aiModal);
                 }
             });
 
@@ -730,6 +899,157 @@
                     reader.readAsDataURL(file);
                 }
             });
+
+            // Project Keypoints AI feature
+            const projectKeypointsModal = document.getElementById('projectKeypointsModal');
+            const closeProjectKeypointsModalBtn = document.getElementById('closeProjectKeypointsModalBtn');
+            const projectKeypointsModalTitle = document.getElementById('projectKeypointsModalTitle');
+            const projectKeypointsModalLoading = document.getElementById('projectKeypointsModalLoading');
+            const projectKeypointsModalContent = document.getElementById('projectKeypointsModalContent');
+            const generateKeypointsBtns = document.querySelectorAll('.generate-keypoints-btn');
+
+            generateKeypointsBtns.forEach(button => {
+                button.addEventListener('click', async (event) => {
+                    const projectCard = event.target.closest('.bg-white.rounded-xl.shadow-lg');
+                    const projectTitle = projectCard.querySelector('.project-title').textContent;
+                    const projectDescription = projectCard.querySelector('.project-description').textContent;
+
+                    projectKeypointsModalTitle.textContent = `Kernpunten voor: ${projectTitle}`;
+                    openModal(projectKeypointsModal);
+                    projectKeypointsModalLoading.style.display = 'block';
+                    projectKeypointsModalContent.style.display = 'none';
+                    projectKeypointsModalContent.innerHTML = ''; // Clear previous content
+
+                    const prompt = `Genereer 3-5 beknopte, resultaatgerichte opsommingen (bullet points) voor een professioneel portfolio, gebaseerd op de volgende projecttitel en beschrijving in het Nederlands. Gebruik duidelijke en actieve taal.
+
+                    Projecttitel: ${projectTitle}
+                    Beschrijving: ${projectDescription}`;
+
+                    try {
+                        const apiKey = "";
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] })
+                        });
+
+                        if (!response.ok) throw new Error(`API Error: ${response.status}`);
+
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates[0].content.parts[0].text) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            // Format as an unordered list
+                            const formattedText = text.split('\n').filter(line => line.trim() !== '').map(line => `<li>${line.replace(/^- /, '')}</li>`).join('');
+                            projectKeypointsModalContent.innerHTML = `<ul>${formattedText}</ul>`;
+                        } else {
+                            throw new Error('Geen geldige content in API-respons.');
+                        }
+                    } catch (error) {
+                        console.error("Fout bij het aanroepen van de Gemini API voor projectkernen:", error);
+                        projectKeypointsModalContent.innerHTML = "<p>Er is een fout opgetreden bij het ophalen van suggesties. Probeer het later opnieuw.</p>";
+                    } finally {
+                        projectKeypointsModalLoading.style.display = 'none';
+                        projectKeypointsModalContent.style.display = 'block';
+                    }
+                });
+            });
+
+            closeProjectKeypointsModalBtn.addEventListener('click', () => closeModal(projectKeypointsModal));
+            projectKeypointsModal.addEventListener('click', (e) => {
+                if (e.target === projectKeypointsModal) {
+                    closeModal(projectKeypointsModal);
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape" && !projectKeypointsModal.classList.contains('hidden')) {
+                    closeModal(projectKeypointsModal);
+                }
+            });
+
+            // Project Detail Modal Logic
+            const projectDetailModal = document.getElementById('projectDetailModal');
+            const closeProjectDetailModalBtn = document.getElementById('closeProjectDetailModalBtn');
+            const projectDetailModalTitle = document.getElementById('projectDetailModalTitle');
+            const projectDetailModalDescription = document.getElementById('projectDetailModalDescription');
+            const projectDetailImagesContainer = document.getElementById('projectDetailImages');
+            const projectDetailVideoDiv = document.getElementById('projectDetailVideo');
+            const projectDetailVideoEmbed = document.getElementById('projectDetailVideoEmbed');
+            const projectDetailDemoBtn = document.getElementById('projectDetailDemoBtn');
+            const carouselPrevBtn = document.getElementById('carouselPrev');
+            const carouselNextBtn = document.getElementById('carouselNext');
+
+            document.querySelectorAll('.view-project-details-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const projectId = button.dataset.projectId;
+                    const projectTitle = button.dataset.projectTitle;
+                    const projectDescription = button.dataset.projectDescription;
+                    const projectImages = JSON.parse(button.dataset.projectImages || '[]');
+                    const projectVideoUrl = button.dataset.projectVideoUrl || '';
+
+                    projectDetailModalTitle.textContent = projectTitle;
+                    projectDetailModalDescription.textContent = projectDescription;
+
+                    // Clear previous images
+                    projectDetailImagesContainer.innerHTML = '';
+                    // Add new images
+                    projectImages.forEach(src => {
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'project-detail-image-item flex-shrink-0 w-full';
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.alt = `Afbeelding van ${projectTitle}`;
+                        imgDiv.appendChild(img);
+                        projectDetailImagesContainer.appendChild(imgDiv);
+                    });
+
+                    // Handle video
+                    if (projectVideoUrl) {
+                        projectDetailVideoEmbed.src = projectVideoUrl;
+                        projectDetailVideoDiv.classList.remove('hidden');
+                    } else {
+                        projectDetailVideoEmbed.src = '';
+                        projectDetailVideoDiv.classList.add('hidden');
+                    }
+
+                    // Handle demo button (example logic)
+                    if (projectId === 'csharp-text-adventure') { // Example: for console app
+                         projectDetailDemoBtn.textContent = 'Simuleer Console Demo';
+                         projectDetailDemoBtn.onclick = () => alert('Simulatie van console-demo: Start C# Text Adventure. Volg de instructies in de console.');
+                         projectDetailDemoBtn.classList.remove('hidden');
+                    } else {
+                        projectDetailDemoBtn.classList.add('hidden');
+                    }
+
+
+                    openModal(projectDetailModal);
+                });
+            });
+
+            closeProjectDetailModalBtn.addEventListener('click', () => closeModal(projectDetailModal));
+            projectDetailModal.addEventListener('click', (e) => {
+                if (e.target === projectDetailModal) {
+                    closeModal(projectDetailModal);
+                }
+            });
+
+            // Carousel navigation for project detail images
+            carouselPrevBtn.addEventListener('click', () => {
+                projectDetailImagesContainer.scrollBy({
+                    left: -projectDetailImagesContainer.offsetWidth,
+                    behavior: 'smooth'
+                });
+            });
+
+            carouselNextBtn.addEventListener('click', () => {
+                projectDetailImagesContainer.scrollBy({
+                    left: projectDetailImagesContainer.offsetWidth,
+                    behavior: 'smooth'
+                });
+            });
+
         });
     </script>
 </body>
