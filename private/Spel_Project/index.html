@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sport Opstelling Tool</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function() {
+        emailjs.init({
+            publicKey: "AYuLbWMU5Dv5R8Y7Y", // Vervang dit door je Public Key
+        });
+    })();
+</script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="overflow-hidden bg-gray-100">
+
+    <div id="orientation-warning" class="hidden">
+        <p class="text-3xl mb-4">👋</p>
+        <p>Draai je scherm naar de landschapsmodus (liggend) voor de beste ervaring.</p>
+    </div>
+
+    <div id="main-app-container" class="w-full h-screen p-4 md:p-8">
+
+        <div id="game-selection-screen" class="flex flex-col items-center justify-center w-full h-full">
+            <h1 class="text-4xl font-bold text-gray-800 mb-8">Kies je Sport</h1>
+            <div class="flex flex-col md:flex-row gap-6">
+                <button id="select-football" class="btn btn-primary text-xl">⚽ Voetbal</button>
+                <button id="select-basketball" class="btn btn-primary text-xl">🏀 Basketbal</button>
+                <button id="select-tennis" class="btn btn-primary text-xl">🎾 Tennis</button>
+            </div>
+        </div>
+
+        <div id="football-game-container" class="game-container hidden">
+            <div class="game-area">
+                <div id="football-field" class="game-field shadow-lg relative"></div>
+                <div id="football-player-panel" class="player-panel">
+                    <h3 class="panel-title">Spelers</h3>
+                    <div class="draggable-template">P1</div>
+                    <div class="draggable-template">P2</div>
+                    <button id="add-football-player-btn" class="btn btn-secondary w-full text-sm mt-auto">Nieuwe Speler</button>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="football-screenshot-btn" class="btn btn-primary"><i class="fas fa-camera mr-2"></i>Verstuur Opstelling</button>
+                <button id="football-back-btn" class="btn btn-secondary">Terug</button>
+            </div>
+        </div>
+
+        <div id="basketball-game-container" class="game-container hidden">
+             <div class="game-area">
+                <div id="basketball-field" class="game-field shadow-lg relative"></div>
+                <div id="basketball-player-panel" class="player-panel">
+                    <h3 class="panel-title">Spelers</h3>
+                    <div class="draggable-template">B1</div>
+                    <button id="add-basketball-player-btn" class="btn btn-secondary w-full text-sm mt-auto">Nieuwe Speler</button>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="basketball-screenshot-btn" class="btn btn-primary"><i class="fas fa-camera mr-2"></i>Verstuur Opstelling</button>
+                <button id="basketball-back-btn" class="btn btn-secondary">Terug</button>
+            </div>
+        </div>
+
+        <div id="tennis-game-container" class="game-container hidden">
+             <div class="game-area">
+                <div id="tennis-field" class="game-field shadow-lg relative"></div>
+                <div id="tennis-player-panel" class="player-panel">
+                    <h3 class="panel-title">Spelers</h3>
+                    <div class="draggable-template">T1</div>
+                    <button id="add-tennis-player-btn" class="btn btn-secondary w-full text-sm mt-auto">Nieuwe Speler</button>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="tennis-screenshot-btn" class="btn btn-primary"><i class="fas fa-camera mr-2"></i>Verstuur Opstelling</button>
+                <button id="tennis-back-btn" class="btn btn-secondary">Terug</button>
+            </div>
+        </div>
+
+    </div> <div id="screenshot-message" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-40">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center">
+            <p class="text-2xl font-bold text-gray-800 mb-4">Screenshot succesvol gemaakt!</p>
+            <p class="text-gray-600">Je wordt doorgestuurd naar het formulier...</p>
+        </div>
+    </div>
+
+    <div id="email-form-container" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Verstuur je opstelling</h2>
+            <form id="email-form" class="flex flex-col">
+                <label for="firstName" class="block text-gray-700 text-sm font-bold mb-2">Voornaam:</label>
+                <input type="text" id="firstName" name="firstName" class="form-input" required>
+
+                <label for="lastName" class="block text-gray-700 text-sm font-bold mb-2">Achternaam:</label>
+                <input type="text" id="lastName" name="lastName" class="form-input" required>
+
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">E-mailadres:</label>
+                <input type="email" id="email" name="email" class="form-input" required>
+
+                <button type="submit" class="btn btn-primary mt-4">Verstuur mijn opstelling</button>
+                <button type="button" id="cancel-form-btn" class="btn btn-secondary mt-2">Annuleren</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="player-edit-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-sm">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Speler Bewerken</h2>
+            <div>
+                <label for="editPlayerName" class="block text-gray-700 text-sm font-bold mb-2">Naam:</label>
+                <input type="text" id="editPlayerName" class="form-input mb-4" maxlength="15">
+
+                <label for="editPlayerImage" class="block text-gray-700 text-sm font-bold mb-2">Afbeelding:</label>
+                <input type="file" id="editPlayerImage" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mb-4">
+                <div class="flex justify-center mb-6">
+                    <img id="editPlayerImagePreview" src="https://placehold.co/80x80" alt="Image Preview" class="w-24 h-24 rounded-full object-cover border-4 border-gray-200">
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <button type="button" id="save-player-btn" class="btn btn-primary w-full">Opslaan</button>
+                    <button type="button" id="delete-player-btn" class="btn w-full bg-red-600 hover:bg-red-700 text-white">Verwijder Speler</button>
+                    <button type="button" id="cancel-player-edit-btn" class="btn btn-secondary w-full">Annuleren</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="status-message" class="hidden fixed bottom-4 right-4 text-white p-4 rounded-lg shadow-lg z-50 transition-transform duration-300 ease-out transform translate-y-full">
+        <p id="status-text"></p>
+    </div>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>
